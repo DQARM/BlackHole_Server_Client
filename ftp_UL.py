@@ -81,6 +81,8 @@ try:
                 print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}      Uploading...")
                 #print(f"Upload speed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {bytes_sent_in_current_second} bytes/sec")
                 log_file.write(f"Upload speed at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}: {bytes_sent_in_current_second} bytes/sec\n")
+                log_file.flush()
+                
                 total_time += 1
                 bytes_sent_in_current_second = 0
 except KeyboardInterrupt:
@@ -90,6 +92,7 @@ average_speed = sent_bytes / total_time if total_time > 0 else 0
 with open(logfile, 'a') as log_file:
     log_file.write(f"End time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
     log_file.write(f"Average upload speed: {average_speed} bytes/sec\n")
+    log_file.flush()
 
 ftp.quit()
 
